@@ -78,38 +78,32 @@ public class Closest_pair_of_points {
 
         return CP;
     }
-
-    public static void main (String[]args){
-
-        int[][] point;
-        int i;
-
-        point = getNumber();
-
-
-    }
-
-    public static int[][] getNumber () {
+    public static void main(String[] args) {
         Random random = new Random();
         int n = random.nextInt(100);
-        int[][] array = new int[n][2];                   //점의 개수
+        int[][] Point = new int[n][2];                   //점의 개수
+        int[][] temp = new int[1][2];
 
-        for (int i = 0; i < array.length; i++)
-            for (int j = 0; j < 2; j++){
-                array[i][0] = random.nextInt();
-                array[i][1] = random.nextInt();
+        for (int i = 0; i < Point.length; i++)
+            for (int j = 0; j < 2; j++) {
+                Point[i][0] = random.nextInt();
+                Point[i][1] = random.nextInt();
             }                                           //(x,y) 값 입력
 
-        for(int a = 0; a < array.length; a++){
-            for(int b = a + 1; b< array.length; b++){
-                if(array[a][0] > array[b][0]){
-                    int temp = array[a][0];
-                    array[a][0] = array[b][0];
-                    array[b][0] = temp;
+        for (int a = 0; a < Point.length; a++) {
+            for (int b = a + 1; b < Point.length; b++) {
+                if (Point[a][0] > Point[b][0]) {
+                    temp[0] = Point[a];
+                    Point[a] = Point[b];
+                    Point[b] = temp[0];
                 }
             }
         }                                               // x 좌표에 대해 오름차순 정렬
 
-        return array;
+        Point = ClosestPair(Point, Point[0][0], Point[n - 1][0]);
+
+        System.out.print("최근접 점의 쌍은 (%d, %d), (%d, %d)이고, ", Point[0][0], Point[0][1], Point[1][0], Point[1][1]);
+        System.out.println("거리는 %.2f이다.", getDistance(Point[0][0], Point[0][1], Point[1][0], Point[1][1]));
+
     }
 }

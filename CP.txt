@@ -1,115 +1,76 @@
-import java.util.Random;
 
-public class Closest_pair_of_points {
+import java.util.Scanner;
 
-    static double getDistance(int x, int y, int x1, int y1) {
-        double d;
-        int xd, yd;
-        yd = (int) Math.pow((y1 - y), 2);
-        xd = (int) Math.pow((x1 - x), 2);
-        d = Math.sqrt(yd + xd);
-        return d;
-    }                   // 두 점 사이 거리 구하기
-
-    static int[][] ClosestPair(int S[][], int start, int end){
-        int[][] CP = new int[2][2];
-        int S_length = end - start + 1;
-        int mid = (start + end) / 2;
-        double dist = getDistance(S[0][0], S[0][1], S[1][0], S[1][1]);
-
-        if(S_length <= 3)
-            if(S_length == 2)
-                        return S;       //점의 개수가 2개
-            else{
-                for (int i = start; i < end; i++) {
-                    for (int j = i + 1; j <= end; j++) {
-                        double k = getDistance(S[i][0], S[i][1], S[j][0], S[j][1]);
-                        if(k < dist){
-                            dist = k;
-                            CP[0][0] = S[i][0];
-                            CP[0][1] = S[i][1];
-                            CP[1][0] = S[j][0];
-                            CP[1][1] = S[j][1];
-                        }                            //점의 개수가 3개
-                    }
-                }
+public class assigment {
+    static int[][] position;
+    public int[] closestPair(int[] a,int p,int q){
+        if(q-p==1)
+            return a;
+        if(q-p==2){
+            int[] b=new int[2];
+            double min=getDist(a[0],a[1]);
+            b[0] = a[0];
+            b[1] = a[1];
+            if(getDist(a[0],a[2])<min) {
+                b[0] = a[0];
+                b[1] = a[2];
             }
-
-        else{
-            int CPl[][] = ClosestPair(S, start, mid);     //중앙선을 기준으로 왼쪽 점들 중 가장 작은 거리의 쌍
-
-            if(S_length % 2 == 1) {                          //점의 개수가 홀수일 경우
-                int CPr[][] = ClosestPair(S, mid + 1, end);        //중앙선을 기준으로 오른쪽 점들 중 가장 작은 거리의 쌍
-                if(getDistance(CPl[0][0], CPl[0][1], CPl[1][0], CPl[1][1]) < getDistance(CPr[0][0], CPr[0][1], CPr[1][0], CPr[1][1]))
-                    CP = CPr;
-                else
-                    CP = CPl;           //CPl과 CPr 중 더 작은 값의 쌍 구하기
+            if(getDist(a[1],a[2])<min) {
+                b[0] = a[1];
+                b[1] = a[2];
             }
-
-            else{                                      //점의 개수가 짝수일 경우
-                int CPr[][] = ClosestPair(S, mid, end);        //중앙선을 기준으로 오른쪽 점들 중 가장 작은 거리의 쌍
-                if(getDistance(CPl[0][0], CPl[0][1], CPl[1][0], CPl[1][1]) < getDistance(CPr[0][0], CPr[0][1], CPr[1][0], CPr[1][1]))
-                    CP = CPr;
-                else
-                    CP = CPl;           //CPl과 CPr 중 더 작은 값의 쌍 구하기
-            }
+            return b;
         }
 
-        int[][] CPc = new int[S_length][2];          //중간 영역에 속하는 점들의 배열
-        int Sc_length = 0;
-        for(int i = start; i<= end; i++){
-            int t = S[mid][0] - S[i][0];
-            if( Math.abs(t) < dist){
-                CPc[Sc_length][1] = S[i][1];
-                Sc_length++;
-            }
-        }                           //y 좌표를 기준으로 오름차순 정렬하면서 배열에 값 넣기
+        int k=(p+q)/2;
+        int[] SL = new int[k];
+        int[] SR = new int[k];
 
-        for(int i = 0; i < Sc_length - 1; i++){
-            for(int j = i + 1; j < Sc_length; j++){
-                int t = CPc[j][1] - CPc[i][1];
-                if(Math.abs(t) < dist)
-                    if(getDistance(CPc[i][0], CPc[i][1], CPc[j][0], CPc[j][1]) < dist)
-                        CP = CPc;               //자기보다 큰 요소만 보면서 거리 측정
-                else
-                    break;              //y 좌표를 기준으로 오름차순 정렬되어있으므로 dist보다 거리가 큰 순간이 오면 반복문 종료
-            }
+        for(int i=0;i<k;i++){
+            SL[i]=position[i][0];
+        }
+        for(int i=k+1;i<a.length;i++){
+            SR[i]=position[i][0];
         }
 
-        return CP;
+        int[] CPL=closestPair(SL,p,k);
+        int[] CPR=closestPair(SR,k+1,q);
     }
 
-    public static void main (String[]args){
+    public static double getDist(int a, int b){  //두 점 사이의 거리 구하기
+        double x= Math.pow(position[a][0]-position[b][0],2);
+        double y= Math.pow(position[a][1]-position[b][1],2);
+        return Math.sqrt(x+y);
+    }
+    public static double minDist(double a,double b){
+        if(a<b)
+            return a;
+        else
+            return b;
+    }
+    public static double minDist(double a,double b,double c) {
+        double min=a;
+        if(b<min)
+            min=b;
+        if(c<min)
+            min=c;
+        return min;
+    }
 
-        int[][] point;
-        int i;
-
-        point = getNumber();
-
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int pNum=scanner.nextInt();
+        position=new int[pNum][2];
+        for(int i=0;i<pNum;i++){
+            position[i][0]= scanner.nextInt();
+            position[i][1]= scanner.nextInt();
+        }
+        int[] S=new int[pNum];
+        for(int i=0;i<pNum;i++){
+            S[i]=position[i][0];
+        }
 
     }
 
-    public static int[][] getNumber () {
-        Random random = new Random();
-        int n = random.nextInt(100);
-        int[][] array = new int[n][2];                   //점의 개수
-
-        for (int i = 0; i < array.length; i++)
-            for (int j = 0; j < 2; j++){
-                array[i][0] = random.nextInt();
-                array[i][1] = random.nextInt();
-            }                                           //(x,y) 값 입력
-
-        for(int a = 0; a < array.length; a++){
-            for(int b = a + 1; b< array.length; b++){
-                if(array[a][0] > array[b][0]){
-                    int temp = array[a][0];
-                    array[a][0] = array[b][0];
-                    array[b][0] = temp;
-                }
-            }
-        }                                               // x 좌표에 대해 오름차순 정렬
-
-        return array;
-    }
 }
+

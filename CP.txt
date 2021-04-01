@@ -37,7 +37,7 @@ public class assigment {
         int[] CPR=closestPair(SR,k+1,q);
     }
 
-    public static double getDist(int a, int b){  //두 점 사이의 거리 구하기
+    public static double getDist(int a, int b){  
         double x= Math.pow(position[a][0]-position[b][0],2);
         double y= Math.pow(position[a][1]-position[b][1],2);
         return Math.sqrt(x+y);

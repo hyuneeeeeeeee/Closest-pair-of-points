@@ -6,19 +6,19 @@
  static int[][] position; 
 
     public int[] closestPair(int[] a,int p,int q){
-   		if(q-p==1)	
-        	return a;
+   	if(q-p==1)	
+       	return a;
 ```
 
 #### 점이 세 개이면 배열에서 최근접 점의 쌍 반환	
 
 ```java
 if(q-p==2){
-	int[] b=new int[2];
-	double min=getDist(a[0],a[1]);
+    int[] b=new int[2];
+    double min=getDist(a[0],a[1]);
     b[0] = a[0];
     b[1] = a[1];
-	if(getDist(a[0],a[2])<min) {
+    if(getDist(a[0],a[2])<min) {
     	b[0] = a[0];
         b[1] = a[2];
     }
@@ -38,10 +38,10 @@ int[] SL = new int[k];
 int[] SR = new int[k];
 
 for(int i=0;i<k;i++)
-	SL[i]=position[i][0];
+    SL[i]=position[i][0];
 	
 for(int i=k+1;i<a.length;i++)
-	SR[i]=position[i][0]; 
+    SR[i]=position[i][0]; 
 ```
 
 #### 분할된 SL과 SR에 대해 재귀적으로 최근접 점의 쌍을 찾아 각각 CPL,CPR이라고 놓는다.
@@ -57,7 +57,7 @@ int[] CPR=closestPair(SR,k+1,q);
 
 ```java
 public static double getDist(int a, int b){  
-	double x= Math.pow(position[a][0]-position[b][0],2);
+    double x= Math.pow(position[a][0]-position[b][0],2);
     double y= Math.pow(position[a][1]-position[b][1],2);
     return Math.sqrt(x+y);
 } 
@@ -67,8 +67,8 @@ public static double getDist(int a, int b){
 
 ```java
 public static double minDist(double a,double b){
-	if(a<b)
-		return a;
+    if(a<b)
+ 	return a;
     else
         return b;
 }
@@ -78,10 +78,10 @@ public static double minDist(double a,double b){
 
 ```java
  Scanner scanner = new Scanner(System.in);
-	int pNum=scanner.nextInt();
-	position=new int[pNum][2];
-
-	for(int i=0;i<pNum;i++){
+    int pNum=scanner.nextInt();
+    position=new int[pNum][2];
+    
+    for(int i=0;i<pNum;i++){
     	position[i][0]= scanner.nextInt();
      	position[i][1]= scanner.nextInt();
 ```
@@ -91,7 +91,7 @@ public static double minDist(double a,double b){
 ```java
 int[] S=new int[pNum];
 for(int i=0;i<pNum;i++)
-	S[i]=position[i][0];
+    S[i]=position[i][0];
 ```
 
 ​        

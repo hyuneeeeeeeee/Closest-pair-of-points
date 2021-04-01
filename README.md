@@ -7,7 +7,7 @@
 
     public int[] closestPair(int[] a,int p,int q){
    	if(q-p==1)	
-       	return a;
+       	    return a;
 ```
 
 #### 점이 세 개이면 배열에서 최근접 점의 쌍 반환	

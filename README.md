@@ -19,11 +19,11 @@ if(q-p==2){
 	 double min=getDist(a[0],a[1]);
             b[0] = a[0];
             b[1] = a[1];
-			if(getDist(a[0],a[2])<min) {
-                b[0] = a[0];
-                b[1] = a[2];
+	if(getDist(a[0],a[2])<min) {
+               b[0] = a[0];
+               b[1] = a[2];
            }
-            if(getDist(a[1],a[2])<min) {
+        if(getDist(a[1],a[2])<min) {
                b[0] = a[1];
                b[1] = a[2];
             }

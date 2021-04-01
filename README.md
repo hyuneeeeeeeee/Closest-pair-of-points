@@ -18,38 +18,7 @@
 
 
 
-1. 만약 주어진 점의 개수가 2개라면 그대로 쌍을 리턴해준다.
-
-   ```java
-   if (S_length <= 3)
-       if (S_length == 2)
-           return S;
-   ```
-
-   
-
-2. 점의 개수가 3개라면, 3개의 쌍에 대하여 거리를 구한 후 최근접 점의 쌍을 리턴해준다. 
-
-   ```java
-   for (int i = start; i < end; i++) {
-       for (int j = i + 1; j <= end; j++) {
-           double k = getDistance(S[i][0], S[i][1], S[j][0], S[j][1]);
-           if (k < dist) {
-               dist = k;
-               CP[0][0] = S[i][0];
-               CP[0][1] = S[i][1];
-               CP[1][0] = S[j][0];
-               CP[1][1] = S[j][1];
-           }
-       }
-   }
-   ```
-
-
-
-3. 점들이 배열 S에 무작위로 할당이 되었기 때문에 x-좌표에 대해 오름차순 정렬을 해준다.
-
-   그리고 주어진 점들의 i번째와 (i + 1)번째의 x 좌표 평균을 중앙선으로 놓는다.
+1. 일단, 점들이 배열 S에 무작위로 할당이 되었기 때문에 x-좌표에 대해 오름차순 정렬을 해준다.
 
    ```java
    Random random = new Random();
@@ -72,6 +41,34 @@
            }
        }
    } 
+   ```
+
+
+2. 만약 주어진 점의 개수가 2개라면 그대로 쌍을 리턴해준다.
+
+   ```java
+   if (S_length <= 3)
+       if (S_length == 2)
+           return S;
+   ```
+
+   
+
+3. 점의 개수가 3개라면, 3개의 쌍에 대하여 거리를 구한 후 최근접 점의 쌍을 리턴해준다. 
+
+   ```java
+   for (int i = start; i < end; i++) {
+       for (int j = i + 1; j <= end; j++) {
+           double k = getDistance(S[i][0], S[i][1], S[j][0], S[j][1]);
+           if (k < dist) {
+               dist = k;
+               CP[0][0] = S[i][0];
+               CP[0][1] = S[i][1];
+               CP[1][0] = S[j][0];
+               CP[1][1] = S[j][1];
+           }
+       }
+   }
    ```
 
 
@@ -152,3 +149,19 @@ for (int i = 0; i < Sc_length - 1; i++) {
 }
 return CP;
 ```
+
+
+
+추가적으로 필요한 함수 : 두 점 사이의 거리 구하기
+
+```java
+static double getDistance(int x, int y, int x1, int y1) {
+	double d;
+	int xd, yd;
+	yd = (int) Math.pow((y1 - y), 2);
+	xd = (int) Math.pow((x1 - x), 2);
+	d = Math.sqrt(yd + xd);
+	return d;
+} 
+```
+

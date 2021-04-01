@@ -1,4 +1,4 @@
-## Closest-pair-of-points ##
+## Closest pair of points ##
 
 - 입력값 : 랜덤으로 할당된 점들의 배열 S
 

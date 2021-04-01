@@ -1,6 +1,5 @@
 ### Line 3, 4
 
-
 #### 점이 두 개이면 배열 그대로 반환 
 
 ```java
@@ -16,19 +15,19 @@
 ```java
 if(q-p==2){
 	int[] b=new int[2];
-	 double min=getDist(a[0],a[1]);
-            b[0] = a[0];
-            b[1] = a[1];
+	double min=getDist(a[0],a[1]);
+    b[0] = a[0];
+    b[1] = a[1];
 	if(getDist(a[0],a[2])<min) {
-               b[0] = a[0];
-               b[1] = a[2];
-           }
-        if(getDist(a[1],a[2])<min) {
-               b[0] = a[1];
-               b[1] = a[2];
-            }
-            return b;
-        } 
+    	b[0] = a[0];
+        b[1] = a[2];
+    }
+    if(getDist(a[1],a[2])<min) {
+        b[0] = a[1];
+        b[1] = a[2];
+    }
+    return b;
+} 
 ```
 
 #### 점이 3개보다 많으면 SL과 SR로 분할
@@ -79,15 +78,12 @@ public static double minDist(double a,double b){
 
 ```java
  Scanner scanner = new Scanner(System.in);
-        int pNum=scanner.nextInt();
+	int pNum=scanner.nextInt();
+	position=new int[pNum][2];
 
-        position=new int[pNum][2];
-
-        for(int i=0;i<pNum;i++){
-
-            position[i][0]= scanner.nextInt();
-
-            position[i][1]= scanner.nextInt();
+	for(int i=0;i<pNum;i++){
+    	position[i][0]= scanner.nextInt();
+     	position[i][1]= scanner.nextInt();
 ```
 
 #### X좌표로 정렬된 배열 S
